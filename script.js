@@ -1,5 +1,6 @@
 // --- 1. Product Data ---
 const products = [
+    // --- Existing Products ---
     { id: 'p001', name: 'RedHawks Jersey (Red/Black)', price: 450, image: '1000054199.jpg' },
     { id: 'p002', name: 'RedHawks Jersey (Black/Red)', price: 450, image: '1000054203.jpg' },
     { id: 'p003', name: 'Jaw Breakers Jersey (Black/Yellow)', price: 450, image: '1000054202.jpg' },
@@ -7,6 +8,15 @@ const products = [
     { id: 'p005', name: 'RedHawks Camo Jersey (Purple/Blue)', price: 450, image: '1000054201.jpg' },
     { id: 'p006', name: 'Extreme EX Jersey (Black/Green)', price: 450, image: '1000054205.jpg' },
     { id: 'p007', name: 'RedCliff Jersey (White/Red)', price: 450, image: '1000054204.jpg' },
+
+    // --- NEW PRODUCTS ADDED HERE ---
+    { id: 'p008', name: 'DXW RC Jersey (Black/Red)', price: 450, image: '12 jercey DXW RC pic.jpg' },
+    { id: 'p009', name: 'DXW Jersey Style 2 (Green)', price: 450, image: '9 Jercey Dxw 2.jpg' },
+    { id: 'p010', name: 'DXW Jersey Style 3 (Abstract Black)', price: 450, image: '11 jercey DXW 2.jpg' },
+    { id: 'p011', name: 'DXW Jersey Style 4 (Tiger Stripe)', price: 450, image: '2 jercey dxw 2.jpg' },
+    { id: 'p012', name: 'DXW Jersey Style 5 (Blue Geometric)', price: 450, image: '7 jercey dxw 2.jpg' },
+    { id: 'p013', name: 'DXW Jersey Style 6 (Red Grid)', price: 450, image: '10 jercey Dxw 2.jpg' },
+    { id: 'p014', name: 'DXW Jersey Style 7 (Infinix Black)', price: 450, image: 'IMG-20250924-WA0087.jpg' },
     // You can add more products here
 ];
 
@@ -47,6 +57,8 @@ function renderProducts() {
     products.forEach(product => {
         const productCard = document.createElement('div');
         productCard.className = 'product-card';
+        // Check if the image path needs adjustment. Assuming images are in the root for simplicity if no subfolder is used, 
+        // but keeping 'images/' prefix from original code for consistency.
         productCard.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
@@ -110,9 +122,6 @@ function updateQuantity(productId, delta) {
  */
 function calculateCartTotals() {
     const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    // Note: In a real app, you'd calculate shipping based on the address entered.
-    // Here, we use the default (Outside Dhaka) or update if we had an address field in the cart modal.
-    // We will assume a simple fixed shipping cost for now.
     const total = subtotal + shippingFee;
     return { subtotal, total };
 }
@@ -243,19 +252,29 @@ checkoutForm.addEventListener('submit', async (e) => {
 
     console.log("Order Data Ready for Admin:", orderData);
 
-    // --- CRITICAL: Data Submission Placeholder (Option C) ---
+    // --- CRITICAL: Data Submission Placeholder (As discussed previously) ---
     // This part SIMULATES sending data to your admin page.
-    // In a real application, you would replace the code below with an AJAX/Fetch request
-    // to a real server API endpoint that saves the data.
+    // Replace the code below with a real API call when you set up your backend.
     
-    // The URL 'https://blu-shadow.github.io/admin/' is a static site and cannot receive
-    // and store this POST request data unless it is an actual backend API endpoint.
-    
-    // await fetch('https://blu-shadow.github.io/admin/', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify(orderData)
-    // });
+    // Example of a real fetch call (currently commented out):
+    /*
+    try {
+        const response = await fetch('https://your-real-api-endpoint.com/submit-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData)
+        });
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const result = await response.json();
+        console.log("Server response:", result);
+    } catch (error) {
+        console.error("Error submitting order:", error);
+        // You might want to show a failure modal here instead
+    }
+    */
     
     // --- Simulation Success ---
     // Clear the cart and show success modal
