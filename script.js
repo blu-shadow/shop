@@ -1,15 +1,4 @@
-// --- 1. Product Data ---
-const products = [
-    // --- Existing Products ---
-    { id: 'p001', name: 'RedHawks Jersey (Red/Black)', price: 450, image: '1000054199.jpg' },
-    { id: 'p002', name: 'RedHawks Jersey (Black/Red)', price: 450, image: '1000054203.jpg' },
-    { id: 'p003', name: 'Jaw Breakers Jersey (Black/Yellow)', price: 450, image: '1000054202.jpg' },
-    { id: 'p004', name: 'Dragon Jersey (Black/White)', price: 450, image: '1000054200.jpg' },
-    { id: 'p005', name: 'RedHawks Camo Jersey (Purple/Blue)', price: 450, image: '1000054201.jpg' },
-    { id: 'p006', name: 'Extreme EX Jersey (Black/Green)', price: 450, image: '1000054205.jpg' },
-    { id: 'p007', name: 'RedCliff Jersey (White/Red)', price: 450, image: '1000054204.jpg' },
-
-    // --- NEW PRODUCTS ADDED HERE ---
+ // --- NEW PRODUCTS ADDED HERE ---
     { id: 'p008', name: 'DXW RC Jersey (Black/Red)', price: 450, image: '12 jercey DXW RC pic.jpg' },
     { id: 'p009', name: 'DXW Jersey Style 2 (Green)', price: 450, image: '9 Jercey Dxw 2.jpg' },
     { id: 'p010', name: 'DXW Jersey Style 3 (Abstract Black)', price: 450, image: '11 jercey DXW 2.jpg' },
