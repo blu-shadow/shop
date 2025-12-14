@@ -1,4 +1,6 @@
- // --- NEW PRODUCTS ADDED HERE ---
+// --- 1. Product Data ---
+const products = [
+    // --- NEW PRODUCTS ADDED HERE ---
     { id: 'p001', name: 'DXW RC Jersey (Black/Red)', price: 450, image: '12 jercey DXW RC pic.jpg' },
     { id: 'p002', name: 'DXW Jersey Style 2 (Green)', price: 450, image: '9 Jercey Dxw 2.jpg' },
     { id: 'p003', name: 'DXW Jersey Style 3 (Abstract Black)', price: 450, image: '11 jercey DXW 2.jpg' },
@@ -9,7 +11,7 @@
     // You can add more products here
 ];
 
-const SHIPPING_DHAKA = 55;
+const SHIPPING_Chittagong = 55;
 const SHIPPING_OUTSIDE = 115;
 // We'll assume Outside Chittagong shipping for the initial total calculation
 let shippingFee = SHIPPING_OUTSIDE;
