@@ -1,19 +1,28 @@
 // --- 1. Product Data ---
 const products = [
+    // --- Existing Products ---
+    { id: 'p001', name: 'RedHawks Jersey (Red/Black)', price: 450, image: '1000054199.jpg' },
+    { id: 'p002', name: 'RedHawks Jersey (Black/Red)', price: 450, image: '1000054203.jpg' },
+    { id: 'p003', name: 'Jaw Breakers Jersey (Black/Yellow)', price: 450, image: '1000054202.jpg' },
+    { id: 'p004', name: 'Dragon Jersey (Black/White)', price: 450, image: '1000054200.jpg' },
+    { id: 'p005', name: 'RedHawks Camo Jersey (Purple/Blue)', price: 450, image: '1000054201.jpg' },
+    { id: 'p006', name: 'Extreme EX Jersey (Black/Green)', price: 450, image: '1000054205.jpg' },
+    { id: 'p007', name: 'RedCliff Jersey (White/Red)', price: 450, image: '1000054204.jpg' },
+
     // --- NEW PRODUCTS ADDED HERE ---
-    { id: 'p001', name: 'DXW RC Jersey (Black/Red)', price: 450, image: '12 jercey DXW RC pic.jpg' },
-    { id: 'p002', name: 'DXW Jersey Style 2 (Green)', price: 450, image: '9 Jercey Dxw 2.jpg' },
-    { id: 'p003', name: 'DXW Jersey Style 3 (Abstract Black)', price: 450, image: '11 jercey DXW 2.jpg' },
-    { id: 'p004', name: 'DXW Jersey Style 4 (Tiger Stripe)', price: 450, image: '2 jercey dxw 2.jpg' },
-    { id: 'p005', name: 'DXW Jersey Style 5 (Blue Geometric)', price: 450, image: '7 jercey dxw 2.jpg' },
-    { id: 'p006', name: 'DXW Jersey Style 6 (Red Grid)', price: 450, image: '10 jercey Dxw 2.jpg' },
-    { id: 'p007', name: 'DXW Jersey Style 7 (Infinix Black)', price: 450, image: 'IMG-20250924-WA0087.jpg' },
+    { id: 'p008', name: 'DXW RC Jersey (Black/Red)', price: 450, image: '12 jercey DXW RC pic.jpg' },
+    { id: 'p009', name: 'DXW Jersey Style 2 (Green)', price: 450, image: '9 Jercey Dxw 2.jpg' },
+    { id: 'p010', name: 'DXW Jersey Style 3 (Abstract Black)', price: 450, image: '11 jercey DXW 2.jpg' },
+    { id: 'p011', name: 'DXW Jersey Style 4 (Tiger Stripe)', price: 450, image: '2 jercey dxw 2.jpg' },
+    { id: 'p012', name: 'DXW Jersey Style 5 (Blue Geometric)', price: 450, image: '7 jercey dxw 2.jpg' },
+    { id: 'p013', name: 'DXW Jersey Style 6 (Red Grid)', price: 450, image: '10 jercey Dxw 2.jpg' },
+    { id: 'p014', name: 'DXW Jersey Style 7 (Infinix Black)', price: 450, image: 'IMG-20250924-WA0087.jpg' },
     // You can add more products here
 ];
 
-const SHIPPING_Chittagong = 55;
-const SHIPPING_OUTSIDE = 115;
-// We'll assume Outside Chittagong shipping for the initial total calculation
+const SHIPPING_DHAKA = 70;
+const SHIPPING_OUTSIDE = 130;
+// We'll assume Outside Dhaka shipping for the initial total calculation
 let shippingFee = SHIPPING_OUTSIDE;
 
 // --- 2. Global State (Shopping Cart) ---
