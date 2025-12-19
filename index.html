@@ -32,7 +32,7 @@
             </div>
             <div class="cart-summary">
                 <p>Subtotal: <span id="cart-subtotal">0</span> TK</p>
-                <p class="shipping-info">Shipping Fee: **70 TK** (Dhaka) / **130 TK** (Outside Dhaka)</p>
+                <p class="shipping-info">Shipping Fee: **55 TK** (Chittagong) / **115 TK** (Outside Chittagong)</p>
                 <p>Total (Approx): <strong id="cart-total">0</strong> TK</p>
             </div>
             <button id="checkout-button" class="btn primary-btn">Proceed to Checkout</button>
@@ -60,24 +60,19 @@
                     <label for="payment">Payment Method *</label>
                     <select id="payment" name="payment" required>
                         <option value="bkash">bKash (Preferred)</option>
-                        <option value="rocket">Rocket</option>
-                        <option value="cod">Cash on Delivery (COD)</option>
+                        <option value="rocket">Nogod</option>
                     </select>
                 </div>
 
                 <div id="bkash-info" class="payment-info">
                     <p>
-                        **bKash Instructions:** Please send the total amount (TK <span id="final-total-display">0</span>) to our Merchant number: **01XXXXXXXXX**.
+                        **bKash Instructions:** Please send the total amount (TK <span id="final-total-display">0</span>) to our Merchant number: **+880 1610-221486**.
                         **Note:** You must enter the **Transaction ID (TrxID)** below.
                     </p>
                     <div class="form-group">
                         <label for="trxid">bKash Transaction ID (TrxID) (If paid via bKash)</label>
                         <input type="text" id="trxid" name="trxid" placeholder="e.g., 8V5A1T4Y">
                     </div>
-                </div>
-
-                <div id="cod-info" class="payment-info" style="display:none;">
-                    <p>**Cash on Delivery:** Please ensure you have the correct amount (TK <span id="final-total-cod-display">0</span>) ready upon delivery. A confirmation call will be made.</p>
                 </div>
 
                 <button type="submit" class="btn primary-btn">Place Order</button>
