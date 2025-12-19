@@ -33,7 +33,6 @@ const checkoutButton = document.getElementById('checkout-button');
 const checkoutForm = document.getElementById('checkout-form');
 const paymentMethod = document.getElementById('payment');
 const bkashInfo = document.getElementById('bkash-info');
-const codInfo = document.getElementById('cod-info');
 const finalTotalDisplay = document.getElementById('final-total-display');
 const finalTotalCodDisplay = document.getElementById('final-total-cod-display');
 
