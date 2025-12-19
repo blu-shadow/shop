@@ -219,7 +219,6 @@ checkoutButton.addEventListener('click', () => {
 paymentMethod.addEventListener('change', (e) => {
     const selected = e.target.value;
     bkashInfo.style.display = selected === 'bkash' ? 'block' : 'none';
-    codInfo.style.display = selected === 'cod' ? 'block' : 'none';
 });
 
 // Checkout Form Submission
