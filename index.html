@@ -11,18 +11,17 @@
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
     <header>
         <div class="container" style="gap:10px;">
             <h1 class="logo">DadaXWear</h1>
 
             <div style="display:flex;gap:10px;align-items:center;">
-                <!-- 🛡️ ADMIN BUTTON -->
-                <button id="admin.html" class="cart-icon" title="Admin Panel">
-                    <i class="fas fa-user-shield"></i>
-                </button>
+                <a href="admin.html" title="Admin Panel" style="text-decoration: none;">
+                    <button id="admin-login-btn" class="cart-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </button>
+                </a>
 
-                <!-- 🛒 CART BUTTON -->
                 <button id="cart-button" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
@@ -31,15 +30,12 @@
         </div>
     </header>
 
-    <!-- ===== MAIN CONTENT ===== -->
     <main class="container">
         <h2>🔥 Our Exclusive Jerseys</h2>
         <div class="product-grid" id="product-grid">
-            <!-- Products rendered by JS -->
-        </div>
+            </div>
     </main>
 
-    <!-- ===== CART MODAL ===== -->
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -63,7 +59,6 @@
         </div>
     </div>
 
-    <!-- ===== CHECKOUT MODAL ===== -->
     <div id="checkout-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="checkout-close-btn">&times;</span>
@@ -118,7 +113,6 @@
         </div>
     </div>
 
-    <!-- ===== SUCCESS MODAL ===== -->
     <div id="success-modal" class="modal">
         <div class="modal-content success-content">
             <span class="close-button">&times;</span>
@@ -131,7 +125,6 @@
         </div>
     </div>
 
-    <!-- ===== SCRIPT ===== -->
     <script src="script.js"></script>
 
 </body>
