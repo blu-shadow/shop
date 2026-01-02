@@ -1,42 +1,50 @@
 // ===============================
-// 1. Product Data (Original data retained)
+// 1. Product Data
 // ===============================
-// Note: আমি এখানে উদাহরণস্বরূপ দুটি প্রোডাক্টের জন্য ডিসকাউন্ট ও আসল মূল্য যোগ করেছি, 
-// যা আপনার ইমেজ-ম্যাচিং ডিজাইনের জন্য দরকার। বাকিগুলোতে ফিক্সড ডিসকাউন্ট ধরে নেওয়া হয়েছে।
 const products = [
-    // Updated Product 1 with discount info
-    { id: 'p001', name: 'DXW RC Jersey (Black/Red)', type: 'Printed Tees', price: 450, originalPrice: 550, discount: 18, image: '12 jercey DXW RC pic.jpg' },
-    { id: 'p002', name: 'DXW Jersey Style 2 (Green)', type: 'Classic Fit', price: 450, originalPrice: 450, discount: 0, image: '9 Jercey Dxw 2.jpg' },
-    { id: 'p003', name: 'DXW Jersey Style 3 (Abstract Black)', type: 'Acid Wash', price: 450, originalPrice: 500, discount: 10, image: '11 jercey DXW 2.jpg' },
-    { id: 'p004', name: 'DXW Jersey Style 4 (Tiger Stripe)', type: 'Printed Tees', price: 450, originalPrice: 450, discount: 0, image: '2 jercey dxw 2.jpg' },
-    { id: 'p005', name: 'DXW Jersey Style 5 (Blue Geometric)', type: 'Printed Tees', price: 450, originalPrice: 450, discount: 0, image: '7 jercey dxw 2.jpg' },
-    { id: 'p006', name: 'DXW Jersey Style 6 (Red Grid)', type: 'Classic Fit', price: 450, originalPrice: 450, discount: 0, image: '10 jercey Dxw 2.jpg' },
-    { id: 'p007', name: 'DXW Jersey Style 7 (Infinix Black)', type: 'Acid Wash', price: 450, originalPrice: 450, discount: 0, image: 'IMG-20250924-WA0087.jpg' }
+    { id: 'p001', name: 'DXW RC Jersey (Black/Red)', price: 450, image: '12 jercey DXW RC pic.jpg' },
+    { id: 'p002', name: 'DXW Jersey Style 2 (Green)', price: 450, image: '9 Jercey Dxw 2.jpg' },
+    { id: 'p003', name: 'DXW Jersey Style 3 (Abstract Black)', price: 450, image: '11 jercey DXW 2.jpg' },
+    { id: 'p004', name: 'DXW Jersey Style 4 (Tiger Stripe)', price: 450, image: '2 jercey dxw 2.jpg' },
+    { id: 'p005', name: 'DXW Jersey Style 5 (Blue Geometric)', price: 450, image: '7 jercey dxw 2.jpg' },
+    { id: 'p006', name: 'DXW Jersey Style 6 (Red Grid)', price: 450, image: '10 jercey Dxw 2.jpg' },
+    { id: 'p007', name: 'DXW Jersey Style 7 (Infinix Black)', price: 450, image: 'IMG-20250924-WA0087.jpg' }
 ];
 
-// ... (2. Shipping, 3. Cart State, 4. DOM Elements - These remain unchanged) ...
+// ===============================
+// 2. Shipping
+// ===============================
 const SHIPPING_DHAKA = 55;
 const SHIPPING_OUTSIDE = 115;
 let shippingFee = SHIPPING_OUTSIDE;
+
+// ===============================
+// 3. Cart State
+// ===============================
 let cart = [];
+
+// ===============================
+// 4. DOM Elements
+// ===============================
 const productGrid = document.getElementById('product-grid');
 const cartButton = document.getElementById('cart-button');
 const cartCountElement = document.getElementById('cart-count');
 const cartModal = document.getElementById('cart-modal');
 const checkoutModal = document.getElementById('checkout-modal');
 const successModal = document.getElementById('success-modal');
+
 const cartItemsList = document.getElementById('cart-items-list');
 const cartSubtotalElement = document.getElementById('cart-subtotal');
 const cartTotalElement = document.getElementById('cart-total');
 const checkoutButton = document.getElementById('checkout-button');
+
 const checkoutForm = document.getElementById('checkout-form');
 const paymentMethod = document.getElementById('payment');
 const bkashInfo = document.getElementById('bkash-info');
 const finalTotalDisplay = document.getElementById('final-total-display');
 
-
 // ===============================
-// 5. Render Products (UPDATED)
+// 5. Render Products
 // ===============================
 function renderProducts() {
     productGrid.innerHTML = '';
@@ -44,50 +52,28 @@ function renderProducts() {
     products.forEach(product => {
         const card = document.createElement('div');
         card.className = 'product-card';
-
-        // Format prices for display
-        const price = product.price.toFixed(2);
-        const originalPrice = product.originalPrice ? product.originalPrice.toFixed(2) : null;
-        const discountBadge = product.discount > 0 
-            ? `<span class="discount-badge">-${product.discount}%</span>` 
-            : '';
-        
-        const originalPriceDisplay = product.discount > 0
-            ? `<span class="original-price">${originalPrice}৳</span>`
-            : '';
-
         card.innerHTML = `
             <div class="product-image-wrapper">
-                ${discountBadge}
                 <img src="${product.image}" alt="${product.name}">
-                
                 <div class="product-actions">
-                    <button class="action-icon add-to-cart" data-id="${product.id}" aria-label="Add to Cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </button>
-                    <button class="action-icon add-to-wishlist" aria-label="Add to Wishlist">
-                        <i class="far fa-heart"></i>
+                    <button class="action-icon" data-id="${product.id}" title="Add to Cart">
+                        <i class="fas fa-cart-plus"></i>
                     </button>
                 </div>
             </div>
-
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <p class="product-type">${product.type}</p> 
-
                 <div class="price-container">
-                    ${originalPriceDisplay}
-                    <span class="sale-price">${price}৳</span>
+                    <span class="sale-price">${product.price} TK</span>
                 </div>
-                
-                </div>
+            </div>
         `;
         productGrid.appendChild(card);
     });
 }
 
 // ===============================
-// 6. Cart Logic (Unchanged)
+// 6. Cart Logic
 // ===============================
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
@@ -142,7 +128,7 @@ function updateCartDisplay() {
             div.className = 'cart-item';
             div.innerHTML = `
                 <span>${item.name}</span>
-                <div>
+                <div class="cart-quantity">
                     <button class="qty-btn" data-id="${item.id}" data-action="decrease">-</button>
                     <span>${item.quantity}</span>
                     <button class="qty-btn" data-id="${item.id}" data-action="increase">+</button>
@@ -159,32 +145,32 @@ function updateCartDisplay() {
 }
 
 // ===============================
-// 7. Events (UPDATED: Click Listener)
+// 7. Events
 // ===============================
 document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     updateCartDisplay();
 });
 
-// *** UPDATED: Click listener now targets the new 'add-to-cart' class ***
+// Add to Cart from product card
 productGrid.addEventListener('click', e => {
-    // Target the closest element that has the class 'add-to-cart'
-    const btn = e.target.closest('.add-to-cart'); 
+    const btn = e.target.closest('.action-icon');
     if (btn?.dataset.id) addToCart(btn.dataset.id);
-
-    // Optional: Handle Wishlist click if needed
-    // if (e.target.closest('.add-to-wishlist')) {
-    //     console.log('Wishlist button clicked');
-    // }
 });
-// *********************************************************************
 
-cartButton.onclick = () => (cartModal.style.display = 'block');
+// Open cart modal
+cartButton.addEventListener('click', () => {
+    cartModal.style.display = 'block';
+});
 
+// Close modals
 document.querySelectorAll('.close-button').forEach(btn => {
-    btn.onclick = () => (btn.closest('.modal').style.display = 'none');
+    btn.addEventListener('click', () => {
+        btn.closest('.modal').style.display = 'none';
+    });
 });
 
+// Quantity buttons in cart
 cartItemsList.addEventListener('click', e => {
     if (!e.target.classList.contains('qty-btn')) return;
     updateQuantity(
@@ -193,21 +179,22 @@ cartItemsList.addEventListener('click', e => {
     );
 });
 
-checkoutButton.onclick = () => {
+// Checkout button
+checkoutButton.addEventListener('click', () => {
     cartModal.style.display = 'none';
     checkoutModal.style.display = 'block';
-};
+});
 
-paymentMethod.onchange = () => {
+// Payment method toggle
+paymentMethod.addEventListener('change', () => {
     bkashInfo.style.display = paymentMethod.value === 'bkash' ? 'block' : 'none';
-};
+});
 
 // ===============================
-// 8. SAVE ORDER FOR ADMIN (Unchanged)
+// 8. Checkout / Save Order
 // ===============================
 checkoutForm.addEventListener('submit', e => {
     e.preventDefault();
-
     if (!cart.length) return alert('Cart is empty!');
 
     const formData = Object.fromEntries(new FormData(checkoutForm));
@@ -236,14 +223,14 @@ checkoutForm.addEventListener('submit', e => {
         status: 'Pending'
     };
 
-    // 🔐 Save to localStorage for Admin Panel
+    // Save to localStorage for admin
     const orders = JSON.parse(localStorage.getItem('dadawear_orders')) || [];
     orders.push(order);
     localStorage.setItem('dadawear_orders', JSON.stringify(orders));
 
     console.log('✅ Order saved:', order);
 
-    // Reset
+    // Reset cart & form
     cart = [];
     updateCartDisplay();
     checkoutForm.reset();
