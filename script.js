@@ -144,8 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 productGrid.addEventListener('click', e => {
-    if (e.target.closest('button')?.dataset.id) {
-        addToCart(e.target.closest('button').dataset.id);
+    const btn = e.target.closest('button');
+    if (btn?.dataset.id) {
+        addToCart(btn.dataset.id);
     }
 });
 
@@ -157,7 +158,8 @@ document.querySelectorAll('.close-button').forEach(btn => {
 
 cartItemsList.addEventListener('click', e => {
     if (!e.target.classList.contains('qty-btn')) return;
-    updateQuantity(e.target.dataset.id,
+    updateQuantity(
+        e.target.dataset.id,
         e.target.dataset.action === 'increase' ? 1 : -1
     );
 });
@@ -188,15 +190,13 @@ checkoutForm.addEventListener('submit', e => {
         subtotal,
         shippingFee,
         total,
-        paymentMethod: formData.payment,
-        trxId: formData.trxid || null,
         status: 'Pending'
     };
 
-    // 🔐 SAVE FOR ADMIN PANEL
-    const orders = JSON.parse(localStorage.getItem('dxw_orders')) || [];
+    // 🔐 SAVE FOR ADMIN PANEL (FINAL FIX)
+    const orders = JSON.parse(localStorage.getItem('dadawear_orders')) || [];
     orders.push(order);
-    localStorage.setItem('dxw_orders', JSON.stringify(orders));
+    localStorage.setItem('dadawear_orders', JSON.stringify(orders));
 
     console.log('Order Saved for Admin:', order);
 
