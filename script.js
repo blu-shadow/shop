@@ -16,6 +16,8 @@ const products = [
 // ===============================
 const SHIPPING_DHAKA = 55;
 const SHIPPING_OUTSIDE = 115;
+
+// default (can improve later)
 let shippingFee = SHIPPING_OUTSIDE;
 
 // ===============================
@@ -53,19 +55,13 @@ function renderProducts() {
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
-            <div class="product-image-wrapper">
-                <img src="${product.image}" alt="${product.name}">
-                <div class="product-actions">
-                    <button class="action-icon" data-id="${product.id}" title="Add to Cart">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                </div>
-            </div>
+            <img src="${product.image}" alt="${product.name}">
             <div class="product-info">
                 <h3>${product.name}</h3>
-                <div class="price-container">
-                    <span class="sale-price">${product.price} TK</span>
-                </div>
+                <p>${product.price} TK</p>
+                <button class="btn primary-btn" data-id="${product.id}">
+                    <i class="fas fa-cart-plus"></i> Add to Cart
+                </button>
             </div>
         `;
         productGrid.appendChild(card);
@@ -128,7 +124,7 @@ function updateCartDisplay() {
             div.className = 'cart-item';
             div.innerHTML = `
                 <span>${item.name}</span>
-                <div class="cart-quantity">
+                <div>
                     <button class="qty-btn" data-id="${item.id}" data-action="decrease">-</button>
                     <span>${item.quantity}</span>
                     <button class="qty-btn" data-id="${item.id}" data-action="increase">+</button>
@@ -152,25 +148,17 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartDisplay();
 });
 
-// Add to Cart from product card
 productGrid.addEventListener('click', e => {
-    const btn = e.target.closest('.action-icon');
+    const btn = e.target.closest('button');
     if (btn?.dataset.id) addToCart(btn.dataset.id);
 });
 
-// Open cart modal
-cartButton.addEventListener('click', () => {
-    cartModal.style.display = 'block';
-});
+cartButton.onclick = () => (cartModal.style.display = 'block');
 
-// Close modals
 document.querySelectorAll('.close-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        btn.closest('.modal').style.display = 'none';
-    });
+    btn.onclick = () => (btn.closest('.modal').style.display = 'none');
 });
 
-// Quantity buttons in cart
 cartItemsList.addEventListener('click', e => {
     if (!e.target.classList.contains('qty-btn')) return;
     updateQuantity(
@@ -179,22 +167,21 @@ cartItemsList.addEventListener('click', e => {
     );
 });
 
-// Checkout button
-checkoutButton.addEventListener('click', () => {
+checkoutButton.onclick = () => {
     cartModal.style.display = 'none';
     checkoutModal.style.display = 'block';
-});
+};
 
-// Payment method toggle
-paymentMethod.addEventListener('change', () => {
+paymentMethod.onchange = () => {
     bkashInfo.style.display = paymentMethod.value === 'bkash' ? 'block' : 'none';
-});
+};
 
 // ===============================
-// 8. Checkout / Save Order
+// 8. SAVE ORDER FOR ADMIN
 // ===============================
 checkoutForm.addEventListener('submit', e => {
     e.preventDefault();
+
     if (!cart.length) return alert('Cart is empty!');
 
     const formData = Object.fromEntries(new FormData(checkoutForm));
@@ -223,14 +210,14 @@ checkoutForm.addEventListener('submit', e => {
         status: 'Pending'
     };
 
-    // Save to localStorage for admin
+    // 🔐 Save to localStorage for Admin Panel
     const orders = JSON.parse(localStorage.getItem('dadawear_orders')) || [];
     orders.push(order);
     localStorage.setItem('dadawear_orders', JSON.stringify(orders));
 
     console.log('✅ Order saved:', order);
 
-    // Reset cart & form
+    // Reset
     cart = [];
     updateCartDisplay();
     checkoutForm.reset();
