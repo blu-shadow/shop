@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>DadaXWear - Premium Jerseys</title>
 
     <link rel="stylesheet" href="style.css">
@@ -11,21 +11,16 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="container" style="gap:10px;">
             <h1 class="logo">DadaXWear</h1>
 
             <div style="display:flex;gap:10px;align-items:center;">
-
-                <!-- ADMIN PANEL LINK (FIXED) -->
                 <a href="admin/" title="Admin Panel" style="text-decoration:none;">
                     <button class="cart-icon" aria-label="Admin Panel">
                         <i class="fas fa-user-shield"></i>
                     </button>
                 </a>
-
-                <!-- CART BUTTON -->
                 <button id="cart-button" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
                     <span id="cart-count">0</span>
@@ -34,13 +29,66 @@
         </div>
     </header>
 
-    <!-- MAIN -->
     <main class="container">
         <h2>🔥 Our Exclusive Jerseys</h2>
-        <div class="product-grid" id="product-grid"></div>
-    </main>
 
-    <!-- CART MODAL -->
+        <div class="product-grid" id="product-grid">
+
+            <div class="product-card" data-id="101" data-name="Aadat Habit Urdu Printed Tees" data-price="499" data-original-price="599">
+                
+                <div class="product-image-wrapper">
+                    <span class="discount-badge">-17%</span> 
+
+                    <img src="https://via.placeholder.com/280x280/8B4513/FFFFFF?text='Aadat'%20Printed%20Tees" alt="Aadat Habit Urdu Printed Tees">
+
+                    <div class="product-actions">
+                        <button class="action-icon add-to-cart" data-id="101" aria-label="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <button class="action-icon add-to-wishlist" aria-label="Add to Wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <h3>'Aadat' Habit Urdu</h3>
+                    <p class="product-type">Printed Tees</p>
+                    
+                    <div class="price-container">
+                        <span class="original-price">599.00৳</span>
+                        <span class="sale-price">499.00৳</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card" data-id="102" data-name="Sabr Patience Hoodies Acid Wash" data-price="1100" data-original-price="1290">
+                
+                <div class="product-image-wrapper">
+                    <span class="discount-badge">-15%</span> 
+                    <img src="https://via.placeholder.com/280x280/333333/FFFFFF?text='Sabr'%20Acid%20Wash%20Hoodie" alt="Sabr Patience Hoodies Acid Wash">
+                    <div class="product-actions">
+                        <button class="action-icon add-to-cart" data-id="102" aria-label="Add to Cart">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <button class="action-icon add-to-wishlist" aria-label="Add to Wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-info">
+                    <h3>'Sabr' (Patience)</h3>
+                    <p class="product-type">Acid Wash</p>
+                    
+                    <div class="price-container">
+                        <span class="original-price">1,290.00৳</span>
+                        <span class="sale-price">1,100.00৳</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </main>
+
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -64,7 +112,6 @@
         </div>
     </div>
 
-    <!-- CHECKOUT MODAL -->
     <div id="checkout-modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -117,7 +164,6 @@
         </div>
     </div>
 
-    <!-- SUCCESS MODAL -->
     <div id="success-modal" class="modal">
         <div class="modal-content success-content">
             <span class="close-button">&times;</span>
