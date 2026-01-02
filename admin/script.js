@@ -32,8 +32,7 @@ function loadOrders() {
     const ordersContainer = document.getElementById("orders");
 
     // Get orders
-    const orders =
-        JSON.parse(localStorage.getItem("dadawear_orders")) || [];
+    const orders = JSON.parse(localStorage.getItem("dadawear_orders")) || [];
 
     ordersContainer.innerHTML = "";
 
@@ -56,11 +55,30 @@ function loadOrders() {
             <p><b>Payment:</b> ${order.customer.payment}</p>
             <p><b>Total:</b> ${order.total} TK</p>
             <p><b>Status:</b> ${order.status}</p>
+            <button class="delete-btn" onclick="deleteOrder(${index})">Delete</button>
             <hr>
         `;
 
         ordersContainer.appendChild(div);
     });
+}
+
+// ===============================
+// DELETE ORDER
+// ===============================
+function deleteOrder(index) {
+    const orders = JSON.parse(localStorage.getItem("dadawear_orders")) || [];
+    const confirmDelete = confirm("Are you sure you want to delete this order? 🗑️");
+    if (!confirmDelete) return;
+
+    // Remove order from array
+    orders.splice(index, 1);
+
+    // Update localStorage
+    localStorage.setItem("dadawear_orders", JSON.stringify(orders));
+
+    // Refresh UI
+    loadOrders();
 }
 
 // ===============================
