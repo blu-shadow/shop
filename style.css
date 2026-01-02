@@ -1,128 +1,8 @@
 /* =======================
-   General Setup
+   Product Card (RESPONSIVE & UPDATED)
 ======================= */
-:root {
-    --primary-color: #E8491D;
-    --secondary-color: #333;
-    --background-color: #f6f6f6;
-    --card-background: #ffffff;
-    --shadow-light: 0 6px 18px rgba(0, 0, 0, 0.1);
-    --border-radius: 14px;
-}
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    /* Ensure Poppins font is loaded via index.html */
-    font-family: 'Poppins', sans-serif; 
-}
-
-body {
-    background-color: var(--background-color);
-    color: var(--secondary-color);
-    /* বেস ফন্ট সাইজ: মোবাইল থেকে ডেস্কটপে স্কেল করার জন্য rem ব্যবহার করা ভালো */
-    font-size: 16px; 
-}
-
-/* =======================
-   Layout & Typography
-======================= */
-.container {
-    width: 92%;
-    max-width: 1200px;
-    margin: auto;
-}
-
-/* =======================
-   Header
-======================= */
-header {
-    background: var(--card-background);
-    padding: 1rem 0;
-    box-shadow: var(--shadow-light);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    color: var(--primary-color);
-    font-size: 1.8rem; /* Use rem for scalable font size */
-    font-weight: 700;
-}
-
-/* =======================
-   Buttons & Icons
-======================= */
-.cart-icon {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.5rem 0.9rem;
-    border-radius: 50px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    /* Ensure icons scale well */
-    font-size: 1rem; 
-}
-
-#cart-count {
-    background: white;
-    color: var(--primary-color);
-    border-radius: 50%;
-    padding: 2px 7px;
-    font-size: 0.75rem;
-    font-weight: 600;
-}
-
-.btn {
-    /* General button style for Modals/Checkout */
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-    width: 100%;
-}
-
-.primary-btn {
-    background-color: var(--primary-color);
-    color: white;
-}
-.primary-btn:hover {
-    background-color: #c43815; /* Darker primary color on hover */
-}
-
-/* =======================
-   Product Grid
-======================= */
-main h2 {
-    text-align: center;
-    margin: 1.8rem 0;
-    font-weight: 600;
-}
-
-.product-grid {
-    display: grid;
-    /* Mobile First: 170px minimum width for product card */
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); 
-    gap: 16px;
-    padding-bottom: 40px;
-}
-
-/* =======================
-   Product Card (Image Style Implementation)
-======================= */
+/* --- Card Structure --- */
 .product-card {
     background: var(--card-background);
     border-radius: var(--border-radius);
@@ -130,6 +10,8 @@ main h2 {
     box-shadow: var(--shadow-light);
     transition: transform 0.25s ease;
     text-align: left;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -139,47 +21,60 @@ main h2 {
 /* --- Image Wrapper for Overlays --- */
 .product-image-wrapper {
     position: relative;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
 .product-image-wrapper img {
     width: 100%;
-    height: 230px; 
+    height: 0;
+    padding-top: 75%; /* Aspect ratio 4:3 for responsiveness */
     object-fit: cover;
     display: block;
 }
 
-/* --- Discount Tag (e.g., -17%) --- */
+@media (min-width: 768px) {
+    .product-image-wrapper img {
+        padding-top: 70%; /* slightly taller for tablets */
+    }
+}
+
+@media (min-width: 1200px) {
+    .product-image-wrapper img {
+        padding-top: 65%; /* desktop slightly shorter */
+    }
+}
+
+/* --- Discount Badge --- */
 .discount-badge {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    background-color: #000; 
-    color: var(--card-background); 
+    top: 10px;
+    left: 10px;
+    background-color: #000;
+    color: var(--card-background);
     font-weight: 600;
-    padding: 6px 12px;
+    padding: 5px 10px;
     border-radius: 4px;
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     z-index: 10;
 }
 
 /* --- Action Icons (Cart & Wishlist) --- */
 .product-actions {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 10px;
+    right: 10px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
     z-index: 10;
 }
 
 .action-icon {
-    background: rgba(255, 255, 255, 0.8); 
+    background: rgba(255, 255, 255, 0.8);
     border: 1px solid #ddd;
     color: var(--secondary-color);
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -194,200 +89,105 @@ main h2 {
 }
 
 .action-icon i {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
-
 
 /* --- Product Information --- */
 .product-info {
-    padding: 12px 12px 15px 12px; 
+    padding: 10px;
     text-align: left;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .product-info h3 {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 2px;
     color: #111;
 }
 
 .product-info .product-type {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 400;
 }
 
 /* --- Price Display --- */
 .price-container {
-    margin-top: 10px;
-    margin-bottom: 0; 
+    margin-top: auto;
     display: flex;
     align-items: baseline;
-    gap: 8px;
-    flex-wrap: wrap; 
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
 .original-price {
-    font-size: 0.9rem;
-    color: #888; 
-    text-decoration: line-through; 
+    font-size: 0.85rem;
+    color: #888;
+    text-decoration: line-through;
     font-weight: 400;
 }
 
 .sale-price {
-    font-size: 1.2rem; 
+    font-size: 1.1rem;
     font-weight: 700;
-    color: var(--primary-color); 
-}
-
-/* =======================
-   Modal Styling
-======================= */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 1001;
-    overflow-y: auto; /* Ensures scrollability on small screens */
-    padding: 20px 0;
-}
-
-.modal-content {
-    background: white;
-    margin: 8% auto;
-    padding: 25px;
-    width: 92%;
-    max-width: 480px;
-    border-radius: 14px;
-}
-
-.modal-content h3 {
-    text-align: center;
     color: var(--primary-color);
-    margin-bottom: 15px;
 }
 
-.close-button {
-    float: right;
-    font-size: 26px;
-    cursor: pointer;
-    line-height: 1; /* Fixes vertical alignment issue */
-}
-
-/* =======================
-   Cart
-======================= */
-#cart-items-list {
-    max-height: 260px;
-    overflow-y: auto;
-    margin-bottom: 15px; /* Increased margin */
-}
-
-.cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Ensures vertical alignment */
-    padding: 8px 0;
-    border-bottom: 1px dashed #ddd;
-}
-
-.cart-item-total {
-    font-weight: 600;
-}
-
-.qty-btn {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.cart-summary {
-    margin-top: 10px;
-    padding: 10px;
-    border-top: 1px solid #eee;
-    margin-bottom: 15px;
-}
-
-.shipping-info {
-    font-size: 0.9rem;
-    color: #555;
-    margin: 5px 0;
-}
-
-/* =======================
-   Checkout Form
-======================= */
-#checkout-form {
-    padding-top: 10px;
-}
-
-.form-group {
-    margin-bottom: 15px; /* Increased margin for better spacing */
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    font-size: 0.9rem;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: 10px; /* Slightly increased padding */
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 1rem; /* Ensures readability on mobile */
-}
-
-.payment-info {
-    background: #fff3cd;
-    color: #856404;
-    padding: 15px; /* Increased padding */
-    border-radius: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ffeeba;
-}
-
-/* =======================
-   Success Modal
-======================= */
-.success-content {
-    text-align: center;
-    padding: 40px 20px;
-}
-
-.success-content h3 {
-    color: #28a745;
-}
-
-.final-message {
+/* --- Responsive Grid --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
     margin-top: 15px;
-    font-weight: 500;
 }
 
-/* =======================
-   Responsive Adjustments (Media Queries)
-======================= */
-@media (min-width: 768px) {
-    /* Tablet/Desktop */
+@media (min-width: 600px) {
     .product-grid {
-        /* Product cards become slightly wider */
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+        gap: 15px;
+    }
+}
+
+@media (min-width: 992px) {
+    .product-grid {
+        gap: 18px;
+    }
+}
+
+/* --- Modal Images Responsive --- */
+.modal-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- Button & Inputs for small screens --- */
+.btn, input, select, textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Final tweaks for mobile --- */
+@media (max-width: 480px) {
+    .discount-badge {
+        font-size: 0.65rem;
+        padding: 4px 8px;
     }
 
-    .product-image-wrapper img {
-        /* Image height increased for better look on large screens */
-        height: 280px; 
+    .action-icon {
+        width: 32px;
+        height: 32px;
     }
 
-    .logo {
-        font-size: 2rem; /* Slightly larger logo */
+    .product-info h3 {
+        font-size: 0.85rem;
+    }
+
+    .sale-price {
+        font-size: 1rem;
     }
 }
