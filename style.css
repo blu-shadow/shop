@@ -1,15 +1,135 @@
 /* =======================
-   Product Card (UPDATED TO MATCH IMAGE STYLE)
+   General Setup
 ======================= */
+:root {
+    --primary-color: #E8491D;
+    --secondary-color: #333;
+    --background-color: #f6f6f6;
+    --card-background: #ffffff;
+    --shadow-light: 0 6px 18px rgba(0, 0, 0, 0.1);
+    --border-radius: 14px;
+}
 
-/* --- Card Structure --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Ensure Poppins font is loaded via index.html */
+    font-family: 'Poppins', sans-serif; 
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    /* বেস ফন্ট সাইজ: মোবাইল থেকে ডেস্কটপে স্কেল করার জন্য rem ব্যবহার করা ভালো */
+    font-size: 16px; 
+}
+
+/* =======================
+   Layout & Typography
+======================= */
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* =======================
+   Header
+======================= */
+header {
+    background: var(--card-background);
+    padding: 1rem 0;
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--primary-color);
+    font-size: 1.8rem; /* Use rem for scalable font size */
+    font-weight: 700;
+}
+
+/* =======================
+   Buttons & Icons
+======================= */
+.cart-icon {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 0.9rem;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* Ensure icons scale well */
+    font-size: 1rem; 
+}
+
+#cart-count {
+    background: white;
+    color: var(--primary-color);
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.btn {
+    /* General button style for Modals/Checkout */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.primary-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+.primary-btn:hover {
+    background-color: #c43815; /* Darker primary color on hover */
+}
+
+/* =======================
+   Product Grid
+======================= */
+main h2 {
+    text-align: center;
+    margin: 1.8rem 0;
+    font-weight: 600;
+}
+
+.product-grid {
+    display: grid;
+    /* Mobile First: 170px minimum width for product card */
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); 
+    gap: 16px;
+    padding-bottom: 40px;
+}
+
+/* =======================
+   Product Card (Image Style Implementation)
+======================= */
 .product-card {
     background: var(--card-background);
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--shadow-light);
     transition: transform 0.25s ease;
-    text-align: left; /* Ensure text starts from the left */
+    text-align: left;
 }
 
 .product-card:hover {
@@ -19,20 +139,14 @@
 /* --- Image Wrapper for Overlays --- */
 .product-image-wrapper {
     position: relative;
-    overflow: hidden; /* Contains the image and overlays */
+    overflow: hidden; 
 }
 
 .product-image-wrapper img {
     width: 100%;
-    height: 230px; /* Adjust as needed */
+    height: 230px; 
     object-fit: cover;
     display: block;
-}
-
-@media (min-width: 768px) {
-    .product-image-wrapper img {
-        height: 280px;
-    }
 }
 
 /* --- Discount Tag (e.g., -17%) --- */
@@ -40,8 +154,8 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    background-color: #000; /* Black background */
-    color: var(--card-background); /* White text */
+    background-color: #000; 
+    color: var(--card-background); 
     font-weight: 600;
     padding: 6px 12px;
     border-radius: 4px;
@@ -61,7 +175,7 @@
 }
 
 .action-icon {
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    background: rgba(255, 255, 255, 0.8); 
     border: 1px solid #ddd;
     color: var(--secondary-color);
     width: 40px;
@@ -79,7 +193,6 @@
     background: var(--card-background);
 }
 
-/* You will need to use icons like Font Awesome for the cart/heart */
 .action-icon i {
     font-size: 1.1rem;
 }
@@ -87,7 +200,7 @@
 
 /* --- Product Information --- */
 .product-info {
-    padding: 12px 12px 15px 12px; /* Slight adjustment for better spacing */
+    padding: 12px 12px 15px 12px; 
     text-align: left;
 }
 
@@ -105,39 +218,176 @@
     font-weight: 400;
 }
 
-/* --- Price Display (Matching the Image) --- */
+/* --- Price Display --- */
 .price-container {
     margin-top: 10px;
-    margin-bottom: 0; /* Remove default paragraph margin */
+    margin-bottom: 0; 
     display: flex;
     align-items: baseline;
     gap: 8px;
-    flex-wrap: wrap; /* Important for smaller screens */
+    flex-wrap: wrap; 
 }
 
 .original-price {
     font-size: 0.9rem;
-    color: #888; /* Grey for original price */
-    text-decoration: line-through; /* Strikethrough */
+    color: #888; 
+    text-decoration: line-through; 
     font-weight: 400;
 }
 
 .sale-price {
-    font-size: 1.2rem; /* Larger and more prominent */
+    font-size: 1.2rem; 
     font-weight: 700;
-    color: var(--primary-color); /* Primary color for sale price */
+    color: var(--primary-color); 
 }
 
-/* --- The original button styling is removed to match the image's text-focused price area. 
-     The 'Add to Cart' functionality is now moved to the image icon.
-     If you still need an Add to Cart button at the bottom:
-*/
-/*
-.product-info button {
-    width: 100%;
-    padding: 8px;
-    font-size: 0.9rem;
-    border-radius: 8px;
-    margin-top: 12px;
+/* =======================
+   Modal Styling
+======================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1001;
+    overflow-y: auto; /* Ensures scrollability on small screens */
+    padding: 20px 0;
 }
-*/
+
+.modal-content {
+    background: white;
+    margin: 8% auto;
+    padding: 25px;
+    width: 92%;
+    max-width: 480px;
+    border-radius: 14px;
+}
+
+.modal-content h3 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.close-button {
+    float: right;
+    font-size: 26px;
+    cursor: pointer;
+    line-height: 1; /* Fixes vertical alignment issue */
+}
+
+/* =======================
+   Cart
+======================= */
+#cart-items-list {
+    max-height: 260px;
+    overflow-y: auto;
+    margin-bottom: 15px; /* Increased margin */
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensures vertical alignment */
+    padding: 8px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.cart-item-total {
+    font-weight: 600;
+}
+
+.qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-summary {
+    margin-top: 10px;
+    padding: 10px;
+    border-top: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.shipping-info {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* =======================
+   Checkout Form
+======================= */
+#checkout-form {
+    padding-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px; /* Increased margin for better spacing */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px; /* Slightly increased padding */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem; /* Ensures readability on mobile */
+}
+
+.payment-info {
+    background: #fff3cd;
+    color: #856404;
+    padding: 15px; /* Increased padding */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ffeeba;
+}
+
+/* =======================
+   Success Modal
+======================= */
+.success-content {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-content h3 {
+    color: #28a745;
+}
+
+.final-message {
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* =======================
+   Responsive Adjustments (Media Queries)
+======================= */
+@media (min-width: 768px) {
+    /* Tablet/Desktop */
+    .product-grid {
+        /* Product cards become slightly wider */
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    }
+
+    .product-image-wrapper img {
+        /* Image height increased for better look on large screens */
+        height: 280px; 
+    }
+
+    .logo {
+        font-size: 2rem; /* Slightly larger logo */
+    }
+}
