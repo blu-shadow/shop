@@ -16,10 +16,12 @@ const products = [
 // ===============================
 const SHIPPING_DHAKA = 55;
 const SHIPPING_OUTSIDE = 115;
+
+// default (can improve later)
 let shippingFee = SHIPPING_OUTSIDE;
 
 // ===============================
-// 3. Global Cart State
+// 3. Cart State
 // ===============================
 let cart = [];
 
@@ -48,6 +50,7 @@ const finalTotalDisplay = document.getElementById('final-total-display');
 // ===============================
 function renderProducts() {
     productGrid.innerHTML = '';
+
     products.forEach(product => {
         const card = document.createElement('div');
         card.className = 'product-card';
@@ -66,16 +69,15 @@ function renderProducts() {
 }
 
 // ===============================
-// 6. Cart Functions
+// 6. Cart Logic
 // ===============================
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
     const item = cart.find(i => i.id === productId);
-    if (item) {
-        item.quantity++;
-    } else {
+    if (item) item.quantity++;
+    else {
         cart.push({
             id: product.id,
             name: product.name,
@@ -83,24 +85,26 @@ function addToCart(productId) {
             quantity: 1
         });
     }
+
     updateCartDisplay();
 }
 
 function updateQuantity(productId, delta) {
-    const index = cart.findIndex(i => i.id === productId);
-    if (index === -1) return;
+    const item = cart.find(i => i.id === productId);
+    if (!item) return;
 
-    cart[index].quantity += delta;
-    if (cart[index].quantity <= 0) cart.splice(index, 1);
+    item.quantity += delta;
+    if (item.quantity <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+    }
+
     updateCartDisplay();
 }
 
 function calculateTotals() {
-    const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-    return {
-        subtotal,
-        total: subtotal + shippingFee
-    };
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const total = subtotal + (cart.length ? shippingFee : 0);
+    return { subtotal, total };
 }
 
 function updateCartDisplay() {
@@ -114,6 +118,7 @@ function updateCartDisplay() {
         checkoutButton.disabled = true;
     } else {
         checkoutButton.disabled = false;
+
         cart.forEach(item => {
             const div = document.createElement('div');
             div.className = 'cart-item';
@@ -145,15 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 productGrid.addEventListener('click', e => {
     const btn = e.target.closest('button');
-    if (btn?.dataset.id) {
-        addToCart(btn.dataset.id);
-    }
+    if (btn?.dataset.id) addToCart(btn.dataset.id);
 });
 
-cartButton.onclick = () => cartModal.style.display = 'block';
+cartButton.onclick = () => (cartModal.style.display = 'block');
 
 document.querySelectorAll('.close-button').forEach(btn => {
-    btn.onclick = () => btn.closest('.modal').style.display = 'none';
+    btn.onclick = () => (btn.closest('.modal').style.display = 'none');
 });
 
 cartItemsList.addEventListener('click', e => {
@@ -169,23 +172,37 @@ checkoutButton.onclick = () => {
     checkoutModal.style.display = 'block';
 };
 
-paymentMethod.onchange = e => {
-    bkashInfo.style.display = e.target.value === 'bkash' ? 'block' : 'none';
+paymentMethod.onchange = () => {
+    bkashInfo.style.display = paymentMethod.value === 'bkash' ? 'block' : 'none';
 };
 
 // ===============================
-// 8. ORDER SAVE (ADMIN DATA)
+// 8. SAVE ORDER FOR ADMIN
 // ===============================
 checkoutForm.addEventListener('submit', e => {
     e.preventDefault();
 
+    if (!cart.length) return alert('Cart is empty!');
+
     const formData = Object.fromEntries(new FormData(checkoutForm));
+
+    if (formData.payment === 'bkash' && !formData.trxid) {
+        alert('Please enter bKash Transaction ID');
+        return;
+    }
+
     const { subtotal, total } = calculateTotals();
 
     const order = {
         orderId: 'DXW-' + Date.now(),
         createdAt: new Date().toISOString(),
-        customer: formData,
+        customer: {
+            name: formData.name,
+            phone: formData.phone,
+            address: formData.address,
+            payment: formData.payment,
+            trxid: formData.trxid || null
+        },
         items: cart,
         subtotal,
         shippingFee,
@@ -193,16 +210,18 @@ checkoutForm.addEventListener('submit', e => {
         status: 'Pending'
     };
 
-    // 🔐 SAVE FOR ADMIN PANEL (FINAL FIX)
+    // 🔐 Save to localStorage for Admin Panel
     const orders = JSON.parse(localStorage.getItem('dadawear_orders')) || [];
     orders.push(order);
     localStorage.setItem('dadawear_orders', JSON.stringify(orders));
 
-    console.log('Order Saved for Admin:', order);
+    console.log('✅ Order saved:', order);
 
+    // Reset
     cart = [];
     updateCartDisplay();
     checkoutForm.reset();
+
     checkoutModal.style.display = 'none';
     successModal.style.display = 'block';
 });
