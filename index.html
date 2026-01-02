@@ -13,12 +13,13 @@
 
     <!-- HEADER -->
     <header>
-        <div class="container header-container">
+        <div class="container" style="gap:10px;">
             <h1 class="logo">DadaXWear</h1>
 
-            <div class="header-right">
-                <!-- ADMIN PANEL LINK -->
-                <a href="admin/" title="Admin Panel">
+            <div style="display:flex;gap:10px;align-items:center;">
+
+                <!-- ADMIN PANEL LINK (FIXED) -->
+                <a href="admin/" title="Admin Panel" style="text-decoration:none;">
                     <button class="cart-icon" aria-label="Admin Panel">
                         <i class="fas fa-user-shield"></i>
                     </button>
@@ -34,7 +35,7 @@
     </header>
 
     <!-- MAIN -->
-    <main class="container main-container">
+    <main class="container">
         <h2>🔥 Our Exclusive Jerseys</h2>
         <div class="product-grid" id="product-grid"></div>
     </main>
@@ -44,9 +45,11 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>🛒 Your Shopping Cart</h3>
+
             <div id="cart-items-list">
                 <p>Your cart is empty.</p>
             </div>
+
             <div class="cart-summary">
                 <p>Subtotal: <span id="cart-subtotal">0</span> TK</p>
                 <p class="shipping-info">
@@ -54,6 +57,7 @@
                 </p>
                 <p>Total (Approx): <strong id="cart-total">0</strong> TK</p>
             </div>
+
             <button id="checkout-button" class="btn primary-btn">
                 Proceed to Checkout
             </button>
@@ -65,7 +69,9 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>📝 Checkout Information</h3>
+
             <form id="checkout-form">
+
                 <div class="form-group">
                     <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -96,6 +102,7 @@
                         to <b>+880 1610-221486</b><br><br>
                         Enter <b>Transaction ID (TrxID)</b> below
                     </p>
+
                     <div class="form-group">
                         <label for="trxid">Transaction ID</label>
                         <input type="text" id="trxid" name="trxid" placeholder="e.g., 8V5A1T4Y">
@@ -105,6 +112,7 @@
                 <button type="submit" class="btn primary-btn">
                     Place Order
                 </button>
+
             </form>
         </div>
     </div>
